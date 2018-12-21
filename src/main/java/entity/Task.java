@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by amirmhp on 12/15/2018.
  */
-public class Task {
+public class Task extends BaseEntity {
     String title;
     Date notifyDate;
     String taskId;
