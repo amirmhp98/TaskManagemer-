@@ -52,6 +52,11 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
+    // https://mvnrepository.com/artifact/javax.xml.ws/jaxws-api
+    compile group: 'javax.xml.ws', name: 'jaxws-api', version: '2.3.1'
+
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
