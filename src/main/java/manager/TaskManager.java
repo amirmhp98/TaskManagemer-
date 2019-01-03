@@ -1,13 +1,16 @@
 package main.java.manager;
 
-import main.java.database.Database;
+import main.java.data.Database;
 import main.java.entity.Task;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by amirmhp on 12/11/2018.
  */
+@Service
 public class TaskManager {
-
+    @Autowired
     Database database;
 
     public TaskManager(Database database) {

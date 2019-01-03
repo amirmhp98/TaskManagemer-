@@ -3,11 +3,9 @@ package main.java.controller;
 import main.java.entity.RequestObject;
 import main.java.entity.User;
 import main.java.manager.UserManager;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.http.HTTPException;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by amirmhp on 12/15/2018.
@@ -45,7 +43,7 @@ public class UserController {
             RequestObject requestObject = new RequestObject();
             requestObject.setRequesterId(id);
             User user = new User();
-            user.setUserId(idOfToken);
+            user.setID(idOfToken);
             requestObject.setContent(user);
             return userManager.getUserProfile(requestObject);
         }

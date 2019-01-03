@@ -1,16 +1,24 @@
 package main.java.entity;
 
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by amirmhp on 12/11/2018.
  */
+@Entity
 public class User extends BaseEntity{
-    String userName;
-    String userId;
-    String phoneNumber;
-    String passwordHash;
-    ArrayList<Task> tasks;
+
+    private String userName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String ID;
+    private String phoneNumber;
+    private String hashedPassword;
+    private String email;
+
+    @OneToMany
+    private List<Task> tasks;
 
 
     public String getUserName() {
@@ -19,11 +27,11 @@ public class User extends BaseEntity{
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public String getUserId() {
-        return userId;
+    public String getID() {
+        return ID;
     }
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setID(String userId) {
+        this.ID = userId;
     }
     public String getPhoneNumber() {
         return phoneNumber;
@@ -31,16 +39,22 @@ public class User extends BaseEntity{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setHashedPassword(String passwordHash) {
+        this.hashedPassword = passwordHash;
     }
-    public ArrayList<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
-    public void setTasks(ArrayList<Task> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
