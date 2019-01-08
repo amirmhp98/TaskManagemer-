@@ -3,6 +3,7 @@ package main.java.controller;
 import main.java.entity.RequestObject;
 import main.java.entity.User;
 import main.java.manager.UserManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.http.HTTPException;
@@ -13,6 +14,8 @@ import javax.xml.ws.http.HTTPException;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
     private UserManager userManager;
 
     public UserController(UserManager userManager) {
@@ -28,14 +31,19 @@ public class UserController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody User user) {
+    public String login(@RequestBody User user) throws Exception {
         RequestObject requestObject = new RequestObject();
         requestObject.setContent(user);
         return userManager.login(requestObject);
     }
 
+    @GetMapping(value = "/logout")
+    public boolean logout( @RequestParam(value = "token") String token) throws Exception {
+        return userManager.logout(token);
+    }
+
     @GetMapping(value = "/{id}")
-    public User getUserProfile(@PathVariable String id, @RequestParam(value = "token") String token) throws HTTPException {
+    public User getUserProfile(@PathVariable String id, @RequestParam(value = "token") String token) throws Exception {
         String idOfToken = userManager.checkToken(id, token);
         if (idOfToken == null) {
             throw new HTTPException(401);
