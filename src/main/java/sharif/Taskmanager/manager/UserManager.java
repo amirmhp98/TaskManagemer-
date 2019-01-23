@@ -13,30 +13,15 @@ import java.util.UUID;
  */
 @Service
 public class UserManager {
-//    @Autowired
-//    private Database dataBase;
+
     @Autowired
     private UserRepository userRepository;
     private HashMap<String, String> tokens = new HashMap<>();  //<token, userId>
 
-    public UserManager(/*Database dataBase,*/ UserRepository userRepository) {
-//        this.dataBase = dataBase;
+    public UserManager( UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public boolean testDB (){
-        User userToTest = new User();
-        userToTest.setEmail("asd");
-        userToTest.setHashedPassword("asd");
-        userToTest.setID(2001L);
-        userToTest.setPhoneNumber("0933");
-        userToTest.setUserName("mhp");
-        System.out.println("saving");
-        userRepository.save(userToTest);
-        System.out.println("probably saved");
-        User res = userRepository.findByUserName("mhp");
-        return true;
-    }
 
     public String addUser(RequestObject requestObject) {
         User userToAdd = ((User)requestObject.getContent());

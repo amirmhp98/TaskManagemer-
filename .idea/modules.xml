@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Taskmanager.iml" filepath="$PROJECT_DIR$/.idea/modules/Taskmanager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Taskmanager_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Taskmanager_main.iml" group="Taskmanager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Taskmanager_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Taskmanager_test.iml" group="Taskmanager" />
     </modules>
   </component>
 </project>
