@@ -10,6 +10,7 @@ import sharif.Taskmanager.manager.UserManager;
 /**
  * Created by amirmhp on 12/15/2018.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {

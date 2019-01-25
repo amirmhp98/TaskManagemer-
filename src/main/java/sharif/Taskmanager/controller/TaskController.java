@@ -11,6 +11,7 @@ import sharif.Taskmanager.manager.TaskManager;
 /**
  * Created by amirmhp on 12/15/2018.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/task")
 public class TaskController {
