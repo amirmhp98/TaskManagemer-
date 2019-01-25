@@ -36,6 +36,7 @@ public class UserController {
         return userManager.login(requestObject);
     }
 
+
     @GetMapping(value = "/logout")
     public boolean logout(@RequestParam(value = "token") String token) throws Exception {
         System.out.println("got the message");
