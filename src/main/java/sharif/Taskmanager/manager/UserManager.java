@@ -5,6 +5,7 @@ import sharif.Taskmanager.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.ws.http.HTTPException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -13,63 +14,74 @@ import java.util.UUID;
  */
 @Service
 public class UserManager {
-//    @Autowired
-//    private Database dataBase;
     @Autowired
     private UserRepository userRepository;
-    private HashMap<String, String> tokens = new HashMap<>();  //<token, userId>
+    private HashMap<String, Long> tokens = new HashMap<>();  //<token, userId>
 
-    public UserManager(/*Database dataBase,*/ UserRepository userRepository) {
-//        this.dataBase = dataBase;
+    public UserManager(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public boolean testDB (){
-        User userToTest = new User();
-        userToTest.setEmail("asd");
-        userToTest.setHashedPassword("asd");
-        userToTest.setID(2001L);
-        userToTest.setPhoneNumber("0933");
-        userToTest.setUserName("mhp");
-        System.out.println("saving");
-        userRepository.save(userToTest);
-        System.out.println("probably saved");
-        User res = userRepository.findByUserName("mhp");
-        return true;
-    }
 
     public String addUser(RequestObject requestObject) {
-        User userToAdd = ((User)requestObject.getContent());
+        User userToAdd = ((User) requestObject.getContent());
         return userRepository.save(userToAdd).getID().toString();
     }
 
     //ret value = token
-    public String login(RequestObject requestObject) throws Exception {
-        User userToCheck = ((User)requestObject.getContent());
+    public String login(RequestObject requestObject) {
+        User userToCheck = ((User) requestObject.getContent());
         User userByUserName = userRepository.findByUserName(userToCheck.getUserName());
-        if (userToCheck.getHashedPassword() == userByUserName.getHashedPassword()){
-            String token =  UUID.randomUUID().toString().replace("-", "");
-            tokens.put(token, userToCheck.getID().toString());
+        if (userToCheck.getHashedPassword() == userByUserName.getHashedPassword()) {
+            String token = UUID.randomUUID().toString().replace("-", "");
+            tokens.put(token, userToCheck.getID());
             return token;
         }
-        throw new Exception("invalid username or password");
+        throw new HTTPException(401);
     }
 
-    public String checkToken(String id, String token) throws Exception {
-        String userIdOfToken = tokens.get(token);
-        if (userIdOfToken == id /* or id == admin */){
-            return userIdOfToken;
-        }else throw new Exception("invalid username or password");
+
+    public boolean checkTokenAccessToUser(Long id, String token) {
+        Long userIdOfToken = tokens.get(token);
+        if (userIdOfToken == id /* or userIdOfToken == admin */) {
+            return true;
+        } else throw new HTTPException(401);
     }
 
-    public User getUserProfile (RequestObject requestObject){
-        return null; //dataBase.getUser(((User)(requestObject.getContent())).getID(), true);
+    public Long getUserIdOfToken(String token) {
+        Long userId = tokens.get(token);
+        if (userId == null) {
+            throw new HTTPException(401);
+        }
+        return userId;
     }
 
-    public boolean logout(String token) throws Exception {
-        if (tokens.containsKey(token)){
+
+    public User getUser(RequestObject requestObject) {
+        Long id = ((User) (requestObject.getContent())).getID();
+        if (!checkTokenAccessToUser(id, requestObject.getToken())) {
+            throw new HTTPException(401);
+        } else {
+            return getUser(id);
+        }
+    }
+
+    public User getUser(Long userId) {
+        User user = userRepository.findById(userId).get();
+        if (user == null) {
+            throw new HTTPException(404);
+        }
+        return user;
+    }
+
+    public void saveUser(User user){
+        userRepository.save(user);
+    }
+
+    public boolean logout(String token) {
+        if (tokens.containsKey(token)) {
             tokens.remove(token);
             return true;
-        }else throw new Exception("invalid username or password");
+        } else throw new HTTPException(401);
     }
 }

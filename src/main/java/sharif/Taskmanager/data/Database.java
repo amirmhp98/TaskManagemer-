@@ -47,7 +47,7 @@
 //        return user;
 //    }
 //
-//    public String checkToken(String token) {
+//    public String checkTokenAccessToUser(String token) {
 //        if (tokens.containsKey(token)){
 //            return tokens.get(token);
 //        }else return null;

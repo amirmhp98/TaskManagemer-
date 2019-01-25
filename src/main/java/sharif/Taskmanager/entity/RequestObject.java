@@ -6,8 +6,14 @@ package sharif.Taskmanager.entity;
 public class RequestObject {
     String requesterId;
     BaseEntity content;
+    String token;
 
-
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
     public String getRequesterId() {
         return requesterId;
     }

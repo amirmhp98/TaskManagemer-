@@ -15,8 +15,8 @@ public class Task extends BaseEntity {
     private Date notifyDate;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String taskId;
-    private String userId;
+    private Long taskId;
+    private Long userId;
     private String AssignerUserId;
 
 
@@ -33,16 +33,16 @@ public class Task extends BaseEntity {
     public void setNotifyDate(Date notifyDate) {
         this.notifyDate = notifyDate;
     }
-    public String getTaskId() {
+    public Long getTaskId() {
         return taskId;
     }
-    public void setTaskId(String taskId) {
+    public void setTaskId(Long taskId) {
         this.taskId = taskId;
     }
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
     public String getAssignerUserId() {
