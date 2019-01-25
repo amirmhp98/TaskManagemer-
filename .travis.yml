@@ -21,5 +21,5 @@ before_script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - ./cc-test-reporter format-coverage -d -t jacoco /build/report/jacoco/test/jacocoTestReport.xm
-  - ./cc-test-reporter format-coverage -d 
+  - ./cc-test-reporter format-coverage -d -t jacoco ./build/report/jacoco/test/jacocoTestReport.xm
+  - ./cc-test-reporter format-coverage -d
