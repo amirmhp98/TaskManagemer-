@@ -18,8 +18,5 @@ before_script:
   - ./cc-test-reporter before-build
   - chmod +x ./gradlew
 
-script:
-  - ./gradlew check
-  - ./gradlew codeCoverageReport
 after_success:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
