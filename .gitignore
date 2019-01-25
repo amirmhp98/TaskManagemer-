@@ -1,7 +1,7 @@
-
+out
 # Created by https://www.gitignore.io/api/emacs,linux,macos,gradle,windows,vim,intellij
 # Edit at https://www.gitignore.io/?templates=emacs,linux,macos,gradle,windows,vim,intellij
-
+*application.properties*
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
