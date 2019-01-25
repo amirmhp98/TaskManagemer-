@@ -6,15 +6,17 @@ before_install:
 
 env:
   global:
-    CC_TEST_REPORTER_ID=f2872133aec3ae9fffa50afbafa06f84b7f12546b35059f3a98493a0b68b11ec
-
+    - CC_TEST_REPORTER_ID=f2872133aec3ae9fffa50afbafa06f84b7f12546b35059f3a98493a0b68b11ec
+    - CODECOV_TOKEN="73807907-de2b-4fa0-b2d6-b4d3210c8ac1"
+test:
+  post:
+    - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+    - bash <(curl -s https://codecov.io/bash)
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
-script:
-  - bundle exec rspec
-  -
+
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
