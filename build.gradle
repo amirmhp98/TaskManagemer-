@@ -32,8 +32,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compile group: 'javax.xml.ws', name: 'jaxws-api', version: '2.3.1'
-
 	testCompile "org.mockito:mockito-inline:+"
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

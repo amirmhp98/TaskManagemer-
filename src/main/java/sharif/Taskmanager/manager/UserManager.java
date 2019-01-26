@@ -32,7 +32,7 @@ public class UserManager {
     public String login(RequestObject requestObject) {
         User userToCheck = ((User) requestObject.getContent());
         User userByUserName = userRepository.findByUserName(userToCheck.getUserName());
-        if (userToCheck.getHashedPassword().equals(userByUserName.getHashedPassword())) {
+        if (userToCheck.getHashedPassword() == userByUserName.getHashedPassword()) {
             String token = UUID.randomUUID().toString().replace("-", "");
             tokens.put(token, userToCheck.getID());
             return token;
