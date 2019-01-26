@@ -23,10 +23,4 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   - ./cc-test-reporter format-coverage -d -t jacoco ./build/reports/jacoco/test/jacocoTestReport.xml
   - ./cc-test-reporter format-coverage -d
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+
